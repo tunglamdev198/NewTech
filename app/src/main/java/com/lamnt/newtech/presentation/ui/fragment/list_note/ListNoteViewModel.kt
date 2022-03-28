@@ -7,7 +7,7 @@ import com.lamnt.newtech.presentation.base.BaseViewModel
 import com.lamnt.newtech.presentation.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class ListNoteViewModel @Inject constructor(private val listNoteUseCase: ListNoteUseCase) :
     BaseViewModel() {
     private val noteState = MutableStateFlow(Resource.success(listOf<Note>()))
-    val notes: StateFlow<Resource<List<Note>>> = noteState
+    val notes = noteState.asStateFlow()
 
     fun getAllNote() {
         viewModelScope.launch {

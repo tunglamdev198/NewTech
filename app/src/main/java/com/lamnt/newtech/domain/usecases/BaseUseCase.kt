@@ -7,7 +7,7 @@ open class BaseUseCase {
     fun <T> handle(source: suspend () -> T) = flow {
         emit(Resource.loading())
         try {
-            val result = source()
+            val result = source.invoke()
             emit(Resource.success(result))
         } catch (e: Exception) {
             emit(Resource.error(e.message!!))
